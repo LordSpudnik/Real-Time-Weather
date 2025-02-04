@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
     <div class="weather-container">
-        <div class="search-bar">
-            <input type="search" placeholder="Enter City Name">
-            <button type="submit" onclick="checkWeather(searchBox.value);"><i class="fa fa-search"></i></button>
-        </div>
-        <div class="error-msg">
-            <p>Invalid City Name</p>
-        </div>
-        <img class="weather-icon">
-        <h1 class="temp"></h1>
-        <h2 class="city"></h2>
+      <div class="search-bar">
+        <input type="search" placeholder="random stuff" />
+        <button type="submit" onclick="checkWeather(searchBox.value);">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div class="error-msg">
+        <p>Invalid City Name</p>
+      </div>
+      <img class="weather-icon" />
+      <h1 class="temp"></h1>
+      <h2 class="city"></h2>
     </div>
 
     <script src="myscript.js"></script>
-</body>
+  </body>
 </html>
