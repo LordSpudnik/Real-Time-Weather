@@ -6,8 +6,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #87CEFA, #1E90FF);
+    background-image: url('./Backgrounds/FirstBg.png');
     color: #fff;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
 }
 
 .weather-container {
@@ -53,6 +56,16 @@ body {
 
 .search-bar button:hover {
     background-color: #0056b3;
+}
+
+.city {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.temp {
+    font-size: 2em;
+    margin-top: 10px;
 }
 
 .error-msg{
