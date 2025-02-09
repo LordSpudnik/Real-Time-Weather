@@ -26,6 +26,7 @@ async function checkWeather(city) {
         document.querySelector('.weather-icon').src = "";
         document.querySelector('.city').innerHTML = "";
         document.querySelector('.temp').innerHTML = "";
+        document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
         document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
         return;
     }
