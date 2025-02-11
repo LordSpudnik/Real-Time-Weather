@@ -94,12 +94,12 @@ document.getElementById('alertForm').addEventListener('submit', function(event) 
     const weatherType = document.getElementById('weatherType').value;
     const alertTime = document.getElementById('alertTime').value;
     
-    document.getElementById('tempThreshold').value = "";
-    document.getElementById('weatherType').value = "";
-    document.getElementById('alertTime').value = "";
     alert(`Alert set for temperature above ${tempThreshold}°C and weather type ${weatherType} within ${alertTime} hours.`);
     document.querySelector('.form-container').classList.remove('active');
     document.querySelector('.weather-container').style.transform = 'translateX(0)';
+    document.getElementById('tempThreshold').value = "";
+    document.getElementById('weatherType').value = "";
+    document.getElementById('alertTime').value = "";
 });
 
 document.getElementById('cancel').addEventListener('click', function() {
