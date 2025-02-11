@@ -175,3 +175,9 @@ body {
 .form-container form button:hover {
     background-color: #0056b3;
 }
+
+#cancel {
+    margin-top: -15px;
+    margin-left: -470px;
+    max-width: 50px;
+}

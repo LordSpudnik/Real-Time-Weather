@@ -26,6 +26,7 @@ async function checkWeather(city) {
         document.querySelector('.weather-type').innerHTML = "";
         document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
         document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
+        document.querySelector('.form-container').style.background = "rgb(255, 255, 255, 0.2)";
         return;
     }
 
@@ -97,4 +98,12 @@ document.getElementById('alertForm').addEventListener('submit', function(event) 
     alert(`Alert set for temperature above ${tempThreshold}°C and weather type ${weatherType} within ${alertTime} hours.`);
     document.querySelector('.form-container').classList.remove('active');
     document.querySelector('.weather-container').style.transform = 'translateX(0)';
+});
+
+document.getElementById('cancel').addEventListener('click', function() {
+    document.querySelector('.form-container').classList.remove('active');
+    document.querySelector('.weather-container').style.transform = 'translateX(0)';
+    document.getElementById('tempThreshold').value = "";
+    document.getElementById('weatherType').value = "";
+    document.getElementById('alertTime').value = "";
 });
