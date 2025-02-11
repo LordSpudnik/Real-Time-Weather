@@ -9,6 +9,14 @@ searchBox.addEventListener('keypress',
         }
 });
 
+const phoneBox = document.querySelector('.phone-input input');
+phoneBox.addEventListener('keypress', 
+    function (event){
+        if(event.key === "Enter") {
+            submitPhoneNumber();
+        }
+});
+
 async function checkWeather(city) {
     if(city === "") {
         document.querySelector('.error-msg').style.display = "none";
@@ -38,6 +46,7 @@ async function checkWeather(city) {
     document.querySelector('.city').innerHTML = data.name;
     document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
     document.querySelector('.weather-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+    document.querySelector('.form-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
 
     if(data.weather[0].main === "Clear") {
         document.querySelector('.weather-icon').src = "./Icons/Sunny.png";
@@ -62,3 +71,28 @@ async function checkWeather(city) {
         document.body.style.backgroundImage = "url('./Backgrounds/Haze.jpg')";
     }
 }
+
+function submitPhoneNumber(){
+    var phoneNumber = document.getElementById("phone").value;
+    if(phoneNumber.length != 10){
+        alert("Please enter a valid phone number.");
+        return;
+    }
+    //alert("Your phone number has been recorded.");
+    document.querySelector('.weather-container').style.transform = 'translateX(-100%)';
+    document.querySelector('.form-container').classList.add('active');
+}
+
+document.getElementById('alertForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const tempThreshold = document.getElementById('tempThreshold').value;
+    const weatherType = document.getElementById('weatherType').value;
+    const alertTime = document.getElementById('alertTime').value;
+    
+    document.getElementById('tempThreshold').value = "";
+    document.getElementById('weatherType').value = "";
+    document.getElementById('alertTime').value = "";
+    alert(`Alert set for temperature above ${tempThreshold}°C and weather type ${weatherType} within ${alertTime} hours.`);
+    document.querySelector('.form-container').classList.remove('active');
+    document.querySelector('.weather-container').style.transform = 'translateX(0)';
+});
