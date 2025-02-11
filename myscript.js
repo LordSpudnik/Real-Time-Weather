@@ -44,7 +44,6 @@ async function checkWeather(city) {
     document.querySelector('.error-msg').style.display = "none";
     var data = await response.json();
 
-    console.log(data);
     document.querySelector('.weather-type').innerHTML = data.weather[0].main;
     document.querySelector('.city').innerHTML = data.name;
     document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
