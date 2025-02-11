@@ -77,6 +77,7 @@ async function checkWeather(city) {
 
 function submitPhoneNumber(){
     var phoneNumber = document.getElementById("phone").value;
+
     if(phoneNumber.length != 10){
         alert("Please enter a valid phone number.");
         return;
@@ -84,6 +85,7 @@ function submitPhoneNumber(){
     //alert("Your phone number has been recorded.");
     document.querySelector('.weather-container').style.transform = 'translateX(-100%)';
     document.querySelector('.form-container').classList.add('active');
+    document.getElementById("phone").value = "";
 }
 
 document.getElementById('alertForm').addEventListener('submit', function(event) {
