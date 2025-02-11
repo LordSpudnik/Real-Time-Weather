@@ -80,3 +80,25 @@ body {
     border-radius: 10px;
     font-weight: bold;
 }
+
+.phone-input input {
+    padding: 10px;
+    border: none;
+    border-radius: 13px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.phone-input button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 13px;
+    background-color: #1E90FF;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.phone-input button:hover {
+    background-color: #0056b3;
+}
