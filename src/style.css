@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./Backgrounds/FirstBg.png');
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.weather-container, .form-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    position: absolute;
+    transition: transform 0.5s ease-in-out;
+}
+
+.weather-container {
+    transform: translateX(0);
+    width: 100%;
+    max-width: 350px;
+}
+
+.form-container {
+    margin-left: 400px; 
+    transform: translateX(100%);
+    display: none;
+    width: 100%;
+    max-width: 500px;
+}
+
+.weather-container p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+.weather-icon {
+    width: 100px;
+    height: auto;
+    margin: 20px 0;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 13px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 13px;
+    background-color: #1E90FF;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+.city {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.temp {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+    background-color: #ffe6e6;
+    padding: 10px;
+    border: 1px solid #ff4d4d;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.phone-input {
+    margin-top: 20px;
+}
+
+.phone-input input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 13px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.phone-input button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 13px;
+    background-color: #1E90FF;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.phone-input button:hover {
+    background-color: #0056b3;
+}
+
+.form-container.active {
+    display: block;
+    transform: translateX(0);
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container form h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.form-container form label {
+    margin: 10px 0 5px;
+    color: #fff;
+}
+
+.form-container form input,
+.form-container form select,
+.form-container form button {
+    padding: 10px;
+    width: 80%;
+    border: none;
+    border-radius: 13px;
+    outline: none;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.form-container form input{
+    max-width: 300px;
+}
+
+.form-container form select{
+    max-width: 320px;
+}
+
+.form-container form button {
+    background-color: #1E90FF;
+    color: white;
+    cursor: pointer;
+    max-width: 100px;
+}
+
+.form-container form button:hover {
+    background-color: #0056b3;
+}
+
+#cancel {
+    margin-top: -15px;
+    margin-left: -470px;
+    max-width: 50px;
+}
