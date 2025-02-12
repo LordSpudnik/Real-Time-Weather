@@ -94,6 +94,10 @@ document.getElementById('alertForm').addEventListener('submit', function(event) 
     const tempThreshold = document.getElementById('tempThreshold').value;
     const weatherType = document.getElementById('weatherType').value;
     const alertTime = document.getElementById('alertTime').value;
+    if(city === "") {
+        alert("Please fill in all the fields.");
+        return;
+    }
     
     alert(`Alert set for temperature above ${tempThreshold}°C and weather type ${weatherType} within the next ${alertTime} hours in ${city}.`);
     document.querySelector('.form-container').classList.remove('active');
