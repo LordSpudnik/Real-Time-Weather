@@ -137,7 +137,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                     }),
                 });
             } else {
-                return;
+                alert("Alert was not modified.");
             }
         }
 
