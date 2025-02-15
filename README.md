@@ -1,2 +1,2 @@
 # real-time-weather
-[The Website](https://rt-weather.netlify.app/)
+<!--[The Website](https://rt-weather.netlify.app/)-->
