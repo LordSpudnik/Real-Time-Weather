@@ -1,17 +1,18 @@
 // Use nodemon server.js to run the server
 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const mongoURI = 'mongodb+srv://SubashVenkat:MongoDBWeatherPass@rt-weather.j3ukj.mongodb.net/UserData';
+const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log('MongoDB connection error:', err));
