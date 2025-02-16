@@ -181,3 +181,16 @@ body {
     margin-left: -470px;
     max-width: 50px;
 }
+
+#deleteAlert {
+    margin-top: -50px;
+    margin-right: -350px;
+    background-color: #1E90FF;
+    color: white;
+    cursor: pointer;
+    max-width: 175px;
+}
+
+#deleteAlert:hover {
+    background-color: #0056b3;
+}

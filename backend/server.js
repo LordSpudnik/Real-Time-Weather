@@ -1,4 +1,4 @@
-// Use node server.js to run the server
+// Use nodemon server.js to run the server
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -62,6 +62,23 @@ app.post('/api/setAlert', async (req, res) => {
     } catch (error) {
         console.error('Error saving alert:', error);
         res.status(500).json({ error: 'Failed to save alert' });
+    }
+});
+
+app.delete('/api/deleteAlert', async (req, res) => {
+    try {
+        const { phoneNumber } = req.body;
+
+        const alert = await Alert.findOneAndDelete({ phoneNumber });
+
+        if (!alert) {
+            return res.status(404).json({ error: "Entered Phone Number doesn't have an alert" });
+        }
+
+        return res.status(200).json({ message: 'Alert deleted successfully!' });
+    } catch (error) {
+        console.error('Error deleting alert:', error);
+        res.status(500).json({ error: 'Failed to delete alert' });
     }
 });
 

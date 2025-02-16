@@ -138,6 +138,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                 });
             } else {
                 alert("Alert was not modified.");
+                return;
             }
         }
 
@@ -155,7 +156,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+        alert('The server is not running.');
     }
 });
 
@@ -167,3 +168,40 @@ document.getElementById('cancel').addEventListener('click', function() {
     document.getElementById('alertTime').value = "";
     document.getElementById("phone").value = "";
 });
+
+document.getElementById('deleteAlert').addEventListener('click', deleteAlert);
+
+async function deleteAlert() {
+    const phoneNumber = document.getElementById("phone").value;
+
+    if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
+        alert("Please enter a valid phone number.");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:5000/api/deleteAlert', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ phoneNumber }),
+        });
+
+        if (response.ok) {
+            const { message } = await response.json();
+            alert(message);
+            document.querySelector('.form-container').classList.remove('active');
+            document.querySelector('.weather-container').style.transform = 'translateX(0)';
+            document.getElementById('tempThreshold').value = "";
+            document.getElementById('weatherType').value = "";
+            document.getElementById('alertTime').value = "";
+            document.getElementById("phone").value = "";
+        } else {
+            alert("Entered Phone Number doesn't have an alert");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('The server is not running.');
+    }
+}
