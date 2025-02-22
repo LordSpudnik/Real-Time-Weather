@@ -15,6 +15,18 @@ phoneBox.addEventListener('keypress', function(event) {
     }
 });
 
+function getLocation() {
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.search-bar input').value = data.city;
+            checkWeather(data.city);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
 async function checkWeather(city) {
     if (city === "") {
         document.querySelector('.error-msg').style.display = "none";

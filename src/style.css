@@ -71,6 +71,11 @@ body {
     cursor: pointer;
 }
 
+.search-bar button img{
+    width: 10px;
+    height: 10px;
+}
+
 .search-bar button:hover {
     background-color: #0056b3;
 }

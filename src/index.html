@@ -14,6 +14,9 @@
   <body>
     <div class="weather-container">
       <div class="search-bar">
+        <button type="submit" onclick="getLocation();" id="location">
+          <i class="fa fa-location-arrow"></i>
+        </button>
         <input type="search" placeholder="Enter City Name" />
         <button type="submit" onclick="checkWeather(searchBox.value);">
           <i class="fa fa-search"></i>
