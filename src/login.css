@@ -1,0 +1,131 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./Backgrounds/FirstBg.png');
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.form-container.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.tab-bar button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.tab-bar button.active {
+    color: #1E90FF;
+    border-bottom: 3px solid #1E90FF;
+}
+
+.tab-bar button:hover {
+    color: #0056b3;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container form h2 {
+    margin-bottom: 20px;
+    color: #333;
+    margin-top: 0;
+}
+
+.form-container form input,
+.form-container form button {
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container form input {
+    max-width: 300px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.8);
+    transition: background 0.3s ease;
+}
+
+.form-container form input:focus {
+    background: rgba(255, 255, 255, 1);
+}
+
+.form-container form button {
+    background-color: #1E90FF;
+    color: white;
+    cursor: pointer;
+    max-width: 150px;
+    transition: background 0.3s ease;
+}
+
+.form-container form button:hover {
+    background-color: #0056b3;
+}
+
+.form-container p {
+    text-align: center;
+    color: #333;
+}
+
+.form-container a {
+    color: #1E90FF;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}

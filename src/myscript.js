@@ -1,5 +1,6 @@
 const apiKey = "18a9856d5813180842d879c20ebcf98d";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const ipKey = "2855899c50a501";
 
 const searchBox = document.querySelector('.search-bar input');
 searchBox.addEventListener('keypress', function(event) {
@@ -16,7 +17,7 @@ phoneBox.addEventListener('keypress', function(event) {
 });
 
 function getLocation() {
-    fetch('https://ipapi.co/json/')
+    fetch('https://ipinfo.io/json?token=' + ipKey)
         .then(response => response.json())
         .then(data => {
             document.querySelector('.search-bar input').value = data.city;
