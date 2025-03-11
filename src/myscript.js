@@ -244,7 +244,6 @@ async function addCity() {
 }
 
 function removeCity(city) {
-    // Remove city from the list in the UI
     const favoritesList = document.querySelector('.favorites');
     const cityItem = Array.from(favoritesList.children).find(item => item.textContent.includes(city));
     if (cityItem) {
