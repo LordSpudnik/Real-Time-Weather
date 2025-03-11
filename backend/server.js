@@ -17,11 +17,14 @@ mongoose.connect(mongoURI)
     .catch(err => console.log('MongoDB connection error:', err));
 
 const alertSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
     city: { type: String, required: true },
     tempThreshold: { type: Number, required: true },
     weatherType: { type: String, required: true },
     alertTime: { type: Number, required: true },
-    phoneNumber: { type: String, required: true, unique: true }
+    phoneNumber: { type: String, required: true, unique: true },
+    favorites: { type: Array, default: [] }
 });
 
 const Alert = mongoose.model('Alert', alertSchema);

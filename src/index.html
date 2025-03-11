@@ -19,6 +19,11 @@
       }
     </script>
     -->
+    <div class="favorites-container">
+      <span style="font-weight: 800; font-size: x-large; display: flex; justify-content: center;"><b><u>Favorites</u></b></span>
+      <ul class="favorites">
+      </ul>
+    </div>
     <div class="weather-container">
       <div class="search-bar">
         <button type="submit" onclick="getLocation();" id="location">
@@ -37,6 +42,9 @@
       <h1 class="temp"></h1>
       <h2 class="city"></h2>
       <div class="phone-input">
+        <button id="favCity">
+          <i class="fa fa-star"></i>
+        </button>
         <input type="tel" placeholder="Enter Phone Number" id="phone" />
         <button type="submit" onclick="submitPhoneNumber();">
           Submit

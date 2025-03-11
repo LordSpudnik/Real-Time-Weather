@@ -38,6 +38,8 @@ async function checkWeather(city) {
         document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
         document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
         document.querySelector('.form-container').style.background = "rgb(255, 255, 255, 0.2)";
+        document.querySelector('.favorites-container').style.background = "rgb(255, 255, 255, 0.2)";
+        document.getElementById('favCity').style.display = "none";
         return;
     }
 
@@ -51,6 +53,8 @@ async function checkWeather(city) {
             document.querySelector('.weather-type').innerHTML = "";
             document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
             document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
+            document.querySelector('.favorites-container').style.background = "rgb(255, 255, 255, 0.2)";
+            document.getElementById('favCity').style.display = "none";
             return;
         }
 
@@ -62,6 +66,8 @@ async function checkWeather(city) {
         document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
         document.querySelector('.weather-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
         document.querySelector('.form-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+        document.querySelector('.favorites-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+        document.getElementById('favCity').style.display = "inline";
 
         if (data.weather[0].main === "Clear") {
             document.querySelector('.weather-icon').src = "./Icons/Sunny.png";
@@ -99,6 +105,7 @@ function submitPhoneNumber() {
         return;
     }
     document.querySelector('.weather-container').style.transform = 'translateX(-100%)';
+    document.querySelector('.weather-container').style.marginLeft = "130px";
     document.querySelector('.form-container').classList.add('active');
 }
 
@@ -160,6 +167,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
             alert(message);
             document.querySelector('.form-container').classList.remove('active');
             document.querySelector('.weather-container').style.transform = 'translateX(0)';
+            document.querySelector('.weather-container').style.marginLeft = "0px";
             document.getElementById('tempThreshold').value = "";
             document.getElementById('weatherType').value = "";
             document.getElementById('alertTime').value = "";
@@ -176,6 +184,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
 document.getElementById('cancel').addEventListener('click', function() {
     document.querySelector('.form-container').classList.remove('active');
     document.querySelector('.weather-container').style.transform = 'translateX(0)';
+    document.querySelector('.weather-container').style.marginLeft = "0px";
     document.getElementById('tempThreshold').value = "";
     document.getElementById('weatherType').value = "";
     document.getElementById('alertTime').value = "";
@@ -216,5 +225,29 @@ async function deleteAlert() {
     } catch (error) {
         console.error('Error:', error);
         alert('The server is not running.');
+    }
+}
+
+document.getElementById('favCity').addEventListener('click', addCity);
+
+async function addCity() {
+    const city = document.querySelector('.city').innerHTML;
+    const item = document.createElement('li');
+    item.textContent = city;
+    const button = document.createElement('button');
+    button.textContent = 'X';
+    button.addEventListener('click', function() {
+        removeCity(city);
+    });
+    item.appendChild(button);
+    document.querySelector('.favorites').appendChild(item);
+}
+
+function removeCity(city) {
+    // Remove city from the list in the UI
+    const favoritesList = document.querySelector('.favorites');
+    const cityItem = Array.from(favoritesList.children).find(item => item.textContent.includes(city));
+    if (cityItem) {
+      favoritesList.removeChild(cityItem);
     }
 }
