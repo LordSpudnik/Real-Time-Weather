@@ -16,6 +16,11 @@ mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log('MongoDB connection error:', err));
 
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true }
+});
+
 const alertSchema = new mongoose.Schema({
     city: { type: String, required: true },
     tempThreshold: { type: Number, required: true },
@@ -24,7 +29,54 @@ const alertSchema = new mongoose.Schema({
     phoneNumber: { type: String, required: true, unique: true }
 });
 
+const User = mongoose.model('User', userSchema);
 const Alert = mongoose.model('Alert', alertSchema);
+
+app.post('/api/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        const user = await User.findOne({ username, password });
+        if (!user) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+        
+        return res.status(200).json({ message: 'Login successful!' });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ error: 'Failed to login' });
+    }
+});
+
+app.post('/api/signup', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+        
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(409).json({ error: 'Username already exists' });
+        }
+
+        const newUser = new User({
+            username,
+            password
+        });
+
+        await newUser.save();
+        return res.status(201).json({ message: 'User created successfully!' });
+    } catch (error) {
+        console.error('Error creating user:', error);
+        res.status(500).json({ error: 'Failed to create user' });
+    }
+});
 
 app.post('/api/setAlert', async (req, res) => {
     try {

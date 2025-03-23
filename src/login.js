@@ -6,9 +6,9 @@ document.getElementById('signupTab').addEventListener('click', function (e) {
     document.getElementById('signupTab').classList.add('active');
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
-  });
-  
-  document.getElementById('loginTab').addEventListener('click', function (e) {
+});
+
+document.getElementById('loginTab').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('signupFormContainer').classList.add('hidden');
     document.getElementById('loginFormContainer').classList.remove('hidden');
@@ -18,39 +18,94 @@ document.getElementById('signupTab').addEventListener('click', function (e) {
     document.getElementById('newPassword').value = '';
     document.getElementById('confirmPassword').value = '';
     document.getElementById('confirmPassword').style.border = '';
-      document.getElementById('confirmPassword').style.color = '';
-  });
+    document.getElementById('confirmPassword').style.color = '';
+});
 
-  function loginUser(e){
+async function loginUser(e) {
     e.preventDefault();
-    // Handle login logic here
-    localStorage.setItem('loggedIn', true);
-    window.location.href = 'index.html';
-  }
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-  function signupUser(e){
+    if (!username || !password) {
+        alert('Please enter both username and password');
+        return;
+    }
+
+    try {
+        let response = await fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.ok) {
+            alert("Login successful!");
+            window.location.href = 'index.html';
+        } else if (response.status === 401) {
+            alert("Invalid username or password");
+        } else {
+            alert("Failed to login");
+        }
+    } catch (error) {
+        console.error('Error logging in:', error);
+        alert('Failed to login');
+    }
+}
+
+async function signupUser(e) {
+    if (!checkPassword()) {
+        alert('Passwords do not match');
+        return;
+    }
     e.preventDefault();
-    // Handle signup logic here
-    localStorage.setItem('loggedIn', true);
-    window.location.href = 'index.html';
-  }
+    const username = document.getElementById('newUsername').value;
+    const password = document.getElementById('newPassword').value;
 
-  document.getElementById('loginForm').addEventListener('submit', loginUser);
-  document.getElementById('signupForm').addEventListener('submit', signupUser);
+    try {
+        let response = await fetch('http://localhost:5000/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-  function checkPassword(){
+        if (response.status === 201) {
+            alert("User created successfully! You can login now.");
+            document.getElementById('newUsername').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        } else if (response.status === 409) {
+            alert("Username already exists. Please choose another one.");
+        } else {
+            alert("Failed to create user");
+        }
+    } catch (error) {
+        console.error('Error creating user:', error);
+        alert('Failed to create user');
+    }
+}
+
+document.getElementById('loginForm').addEventListener('submit', loginUser);
+document.getElementById('signupForm').addEventListener('submit', signupUser);
+
+function checkPassword() {
     const password = document.getElementById('newPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    if(password.length === 0 || confirmPassword.length === 0){
-      document.getElementById('confirmPassword').style.border = '';
-      document.getElementById('confirmPassword').style.color = '';
-      return;
+    if (password.length === 0 || confirmPassword.length === 0) {
+        document.getElementById('confirmPassword').style.border = '';
+        document.getElementById('confirmPassword').style.color = '';
+        return false;
     }
-    if(password !== confirmPassword){
-      document.getElementById('confirmPassword').style.border = '1px solid red';
-      document.getElementById('confirmPassword').style.color = 'red';
+    if (password !== confirmPassword) {
+        document.getElementById('confirmPassword').style.border = '1px solid red';
+        document.getElementById('confirmPassword').style.color = 'red';
+        return false;
     } else {
-      document.getElementById('confirmPassword').style.border = '';
-      document.getElementById('confirmPassword').style.color = '';
+        document.getElementById('confirmPassword').style.border = '';
+        document.getElementById('confirmPassword').style.color = '';
+        return true;
     }
-  }
+}

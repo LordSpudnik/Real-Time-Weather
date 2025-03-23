@@ -139,6 +139,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
             }),
         });
 
+        console.log(response);
         if (response.status === 409) {
             const userConfirmed = confirm('Alert already exists for this phone number. Do you want to update it?');
             if (userConfirmed) {
