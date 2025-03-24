@@ -50,7 +50,7 @@ async function loginUser(e) {
         }
     } catch (error) {
         console.error('Error logging in:', error);
-        alert('Failed to login');
+        alert('The server is not running.');
     }
 }
 
@@ -84,7 +84,7 @@ async function signupUser(e) {
         }
     } catch (error) {
         console.error('Error creating user:', error);
-        alert('Failed to create user');
+        alert('The server is not running.');
     }
 }
 
