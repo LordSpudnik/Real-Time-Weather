@@ -1,4 +1,4 @@
-document.getElementById('signupTab').addEventListener('click', function (e) {
+document.getElementById('signupTab').addEventListener('click', async function (e) {
     e.preventDefault();
     document.getElementById('loginFormContainer').classList.add('hidden');
     document.getElementById('signupFormContainer').classList.remove('hidden');
@@ -8,7 +8,7 @@ document.getElementById('signupTab').addEventListener('click', function (e) {
     document.getElementById('password').value = '';
 });
 
-document.getElementById('loginTab').addEventListener('click', function (e) {
+document.getElementById('loginTab').addEventListener('click', async function (e) {
     e.preventDefault();
     document.getElementById('signupFormContainer').classList.add('hidden');
     document.getElementById('loginFormContainer').classList.remove('hidden');
@@ -91,7 +91,7 @@ async function signupUser(e) {
 document.getElementById('loginForm').addEventListener('submit', loginUser);
 document.getElementById('signupForm').addEventListener('submit', signupUser);
 
-function checkPassword() {
+async function checkPassword() {
     const password = document.getElementById('newPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     if (password.length === 0 || confirmPassword.length === 0) {

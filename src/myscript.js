@@ -3,20 +3,20 @@ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 const ipKey = "2855899c50a501";
 
 const searchBox = document.querySelector('.search-bar input');
-searchBox.addEventListener('keypress', function(event) {
+searchBox.addEventListener('keypress', async function(event) {
     if (event.key === "Enter") {
         checkWeather(searchBox.value);
     }
 });
 
 const phoneBox = document.querySelector('.phone-input input');
-phoneBox.addEventListener('keypress', function(event) {
+phoneBox.addEventListener('keypress', async function(event) {
     if (event.key === "Enter") {
         submitPhoneNumber();
     }
 });
 
-function getLocation() {
+async function getLocation() {
     fetch('https://ipinfo.io/json?token=' + ipKey)
         .then(response => response.json())
         .then(data => {
@@ -97,7 +97,7 @@ async function checkWeather(city) {
     }
 }
 
-function submitPhoneNumber() {
+async function submitPhoneNumber() {
     var phoneNumber = document.getElementById("phone").value;
 
     if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
@@ -237,14 +237,14 @@ async function addCity() {
     item.textContent = city;
     const button = document.createElement('button');
     button.textContent = 'X';
-    button.addEventListener('click', function() {
+    button.addEventListener('click', async function() {
         removeCity(city);
     });
     item.appendChild(button);
     document.querySelector('.favorites').appendChild(item);
 }
 
-function removeCity(city) {
+async function removeCity(city) {
     const favoritesList = document.querySelector('.favorites');
     const cityItem = Array.from(favoritesList.children).find(item => item.textContent.includes(city));
     if (cityItem) {
