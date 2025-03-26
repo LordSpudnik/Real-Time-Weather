@@ -57,13 +57,13 @@ async function checkWeather(city) {
                 document.body.style.backgroundImage = "url('./Backgrounds/Sunny.jpg')";
             } else if (data.weather[0].main === "Clouds") {
                 document.querySelector('.weather-icon').src = "./Icons/Cloudy.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/cloudy.jpg')";
+                document.body.style.backgroundImage = "url('./Backgrounds/Cloudy.jpg')";
             } else if (data.weather[0].main === "Rain") {
                 document.querySelector('.weather-icon').src = "./Icons/Rains.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/rainy.jpg')";
+                document.body.style.backgroundImage = "url('./Backgrounds/Rainy.jpg')";
             } else if (data.weather[0].main === "Snow") {
                 document.querySelector('.weather-icon').src = "./Icons/Snowy.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/snowy.jpg')";
+                document.body.style.backgroundImage = "url('./Backgrounds/Snowy.jpg')";
             } else if (data.weather[0].main === "Mist") {
                 document.querySelector('.weather-icon').src = "./Icons/Mist.png";
                 document.body.style.backgroundImage = "url('./Backgrounds/Misty.jpg')";
