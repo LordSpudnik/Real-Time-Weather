@@ -40,82 +40,81 @@ async function checkWeather(city) {
         if (!response.ok) {
             showError();
             return;
-        } else {
-            document.querySelector('.error-msg').style.display = "none";
-            var data = await response.json();
-
-            document.querySelector('.weather-type').innerHTML = data.weather[0].main;
-            document.querySelector('.city').innerHTML = data.name;
-            document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
-            document.querySelector('.weather-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
-            document.querySelector('.form-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
-            document.querySelector('.favorites-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
-            document.getElementById('favCity').style.display = "inline";
-
-            if (data.weather[0].main === "Clear") {
-                document.querySelector('.weather-icon').src = "./Icons/Sunny.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Sunny.jpg')";
-            } else if (data.weather[0].main === "Clouds") {
-                document.querySelector('.weather-icon').src = "./Icons/Cloudy.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Cloudy.jpg')";
-            } else if (data.weather[0].main === "Rain") {
-                document.querySelector('.weather-icon').src = "./Icons/Rains.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Rainy.jpg')";
-            } else if (data.weather[0].main === "Snow") {
-                document.querySelector('.weather-icon').src = "./Icons/Snowy.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Snowy.jpg')";
-            } else if (data.weather[0].main === "Mist") {
-                document.querySelector('.weather-icon').src = "./Icons/Mist.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Misty.jpg')";
-            } else if (data.weather[0].main === "Drizzle") {
-                document.querySelector('.weather-icon').src = "./Icons/Drizzle.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Drizzle.jpg')";
-            } else if (data.weather[0].main === "Haze") {
-                document.querySelector('.weather-icon').src = "./Icons/Haze.png";
-                document.body.style.backgroundImage = "url('./Backgrounds/Haze.jpg')";
-            }
-
-            const timezoneOffset = data.timezone;
-            const currentUTC = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60000);
-            const cityTime = new Date(currentUTC.getTime() + timezoneOffset * 1000);
-            const futureTimes = getNextThreeTimes(cityTime);
-
-            const humidity = data.main.humidity;
-            const pressure = data.main.pressure;
-            const windSpeed = data.wind.speed;
-
-            const res = await fetch('http://localhost:5001/predict', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
-            });
-
-            if (!res.ok) {
-                const errorText = await res.text();
-                console.error('Failed to fetch predictions:', errorText);
-                throw new Error('Failed to fetch predictions');
-            }
-
-            const pred = await res.json();
-
-            const oldPred = document.getElementById("ml-times");
-            if (oldPred) oldPred.remove();
-
-            const cityElem = document.querySelector(".city");
-            const predElem = document.createElement("div");
-            predElem.id = "ml-times";
-            predElem.style.marginTop = "10px";
-            predElem.style.fontSize = "16px";
-
-            predElem.innerHTML = `
-                <h4 style="margin-bottom: 8px;  font-size: 14px; color: #fff;">Predicted Temperatures</h4>
-                <p><strong>${futureTimes[0]}</strong>: ${Math.round(pred.predicted_temperature_3h)}°C</p>
-                <p><strong>${futureTimes[1]}</strong>: ${Math.round(pred.predicted_temperature_6h)}°C</p>
-                <p><strong>${futureTimes[2]}</strong>: ${Math.round(pred.predicted_temperature_9h)}°C</p>
-            `;
-
-            cityElem.insertAdjacentElement("afterend", predElem);
         }
+        document.querySelector('.error-msg').style.display = "none";
+        var data = await response.json();
+
+        document.querySelector('.weather-type').innerHTML = data.weather[0].main;
+        document.querySelector('.city').innerHTML = data.name;
+        document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
+        document.querySelector('.weather-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+        document.querySelector('.form-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+        document.querySelector('.favorites-container').style.backgroundColor = "rgba(54, 47, 47, 0.8)";
+        document.getElementById('favCity').style.display = "inline";
+
+        if (data.weather[0].main === "Clear") {
+            document.querySelector('.weather-icon').src = "./Icons/Sunny.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Sunny.jpg')";
+        } else if (data.weather[0].main === "Clouds") {
+            document.querySelector('.weather-icon').src = "./Icons/Cloudy.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Cloudy.jpg')";
+        } else if (data.weather[0].main === "Rain") {
+            document.querySelector('.weather-icon').src = "./Icons/Rains.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Rainy.jpg')";
+        } else if (data.weather[0].main === "Snow") {
+            document.querySelector('.weather-icon').src = "./Icons/Snowy.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Snowy.jpg')";
+        } else if (data.weather[0].main === "Mist") {
+            document.querySelector('.weather-icon').src = "./Icons/Mist.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Misty.jpg')";
+        } else if (data.weather[0].main === "Drizzle") {
+            document.querySelector('.weather-icon').src = "./Icons/Drizzle.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Drizzle.jpg')";
+        } else if (data.weather[0].main === "Haze") {
+            document.querySelector('.weather-icon').src = "./Icons/Haze.png";
+            document.body.style.backgroundImage = "url('./Backgrounds/Haze.jpg')";
+        }
+
+        const timezoneOffset = data.timezone;
+        const currentUTC = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60000);
+        const cityTime = new Date(currentUTC.getTime() + timezoneOffset * 1000);
+        const futureTimes = getNextThreeTimes(cityTime);
+
+        const humidity = data.main.humidity;
+        const pressure = data.main.pressure;
+        const windSpeed = data.wind.speed;
+
+        const res = await fetch('http://localhost:5001/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error('Failed to fetch predictions:', errorText);
+            throw new Error('Failed to fetch predictions');
+        }
+
+        const pred = await res.json();
+
+        const oldPred = document.getElementById("ml-times");
+        if (oldPred) oldPred.remove();
+
+        const cityElem = document.querySelector(".city");
+        const predElem = document.createElement("div");
+        predElem.id = "ml-times";
+        predElem.style.marginTop = "10px";
+        predElem.style.fontSize = "16px";
+
+        predElem.innerHTML = `
+            <h4 style="margin-bottom: 8px;  font-size: 14px; color: #fff;">Predicted Temperatures</h4>
+            <p><strong>${futureTimes[0]}</strong>: ${Math.round(pred.predicted_temperature_3h)}°C</p>
+            <p><strong>${futureTimes[1]}</strong>: ${Math.round(pred.predicted_temperature_6h)}°C</p>
+            <p><strong>${futureTimes[2]}</strong>: ${Math.round(pred.predicted_temperature_9h)}°C</p>
+        `;
+
+        cityElem.insertAdjacentElement("afterend", predElem);
     } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching the weather data. Ensure app.py is running.');
