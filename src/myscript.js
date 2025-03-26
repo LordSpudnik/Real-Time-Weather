@@ -30,31 +30,14 @@ async function getLocation() {
 
 async function checkWeather(city) {
     if (city === "") {
-        document.querySelector('.error-msg').style.display = "none";
-        document.querySelector('.weather-icon').src = "";
-        document.querySelector('.city').innerHTML = "";
-        document.querySelector('.temp').innerHTML = "";
-        document.querySelector('.weather-type').innerHTML = "";
-        document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
-        document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
-        document.querySelector('.form-container').style.background = "rgb(255, 255, 255, 0.2)";
-        document.querySelector('.favorites-container').style.background = "rgb(255, 255, 255, 0.2)";
-        document.getElementById('favCity').style.display = "none";
+        resetUI();
         return;
     }
 
     try {
         const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
         if (!response.ok) {
-            document.querySelector('.error-msg').style.display = "block";
-            document.querySelector('.weather-icon').src = "";
-            document.querySelector('.city').innerHTML = "";
-            document.querySelector('.temp').innerHTML = "";
-            document.querySelector('.weather-type').innerHTML = "";
-            document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
-            document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
-            document.querySelector('.favorites-container').style.background = "rgb(255, 255, 255, 0.2)";
-            document.getElementById('favCity').style.display = "none";
+            showError();
             return;
         }
 
@@ -91,10 +74,82 @@ async function checkWeather(city) {
             document.querySelector('.weather-icon').src = "./Icons/Haze.png";
             document.body.style.backgroundImage = "url('./Backgrounds/Haze.jpg')";
         }
+
+        const timezoneOffset = data.timezone;
+        const currentUTC = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60000);
+        const cityTime = new Date(currentUTC.getTime() + timezoneOffset * 1000);
+        const futureTimes = getNextThreeTimes(cityTime);
+
+        const humidity = data.main.humidity;
+        const pressure = data.main.pressure;
+        const windSpeed = data.wind.speed;
+
+        const res = await fetch('http://localhost:5001/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error('Failed to fetch predictions:', errorText);
+            throw new Error('Failed to fetch predictions');
+        }
+
+        const pred = await res.json();
+
+        const oldPred = document.getElementById("ml-times");
+        if (oldPred) oldPred.remove();
+
+        const cityElem = document.querySelector(".city");
+        const predElem = document.createElement("div");
+        predElem.id = "ml-times";
+        predElem.style.marginTop = "10px";
+        predElem.style.fontSize = "16px";
+
+        predElem.innerHTML = `
+            <h4 style="margin-bottom: 8px;  font-size: 14px; color: #fff;">Predicted Temperatures</h4>
+            <p><strong>${futureTimes[0]}</strong>: ${Math.round(pred.predicted_temperature_3h)}°C</p>
+            <p><strong>${futureTimes[1]}</strong>: ${Math.round(pred.predicted_temperature_6h)}°C</p>
+            <p><strong>${futureTimes[2]}</strong>: ${Math.round(pred.predicted_temperature_9h)}°C</p>
+        `;
+
+        cityElem.insertAdjacentElement("afterend", predElem);
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while fetching the weather data. Please try again.');
+        alert('An error occurred while fetching the weather data. Ensure app.py is running.');
     }
+}
+
+function getNextThreeTimes(baseTime) {
+    const hours = [3, 6, 9];
+    return hours.map(h => {
+        const future = new Date(baseTime.getTime() + h * 3600000);
+        return future.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        }).replace('am', 'AM').replace('pm', 'PM');
+    });
+}
+
+
+function resetUI() {
+    document.querySelector('.error-msg').style.display = "none";
+    document.querySelector('.weather-icon').src = "";
+    document.querySelector('.city').innerHTML = "";
+    document.querySelector('.temp').innerHTML = "";
+    document.querySelector('.weather-type').innerHTML = "";
+    document.body.style.backgroundImage = "url('./Backgrounds/FirstBg.png')";
+    document.querySelector('.weather-container').style.background = "rgb(255, 255, 255, 0.2)";
+    document.querySelector('.form-container').style.background = "rgb(255, 255, 255, 0.2)";
+    document.querySelector('.favorites-container').style.background = "rgb(255, 255, 255, 0.2)";
+    document.getElementById('favCity').style.display = "none";
+}
+
+function showError() {
+    document.querySelector('.error-msg').style.display = "block";
+    resetUI();
 }
 
 async function submitPhoneNumber() {

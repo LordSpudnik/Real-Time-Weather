@@ -14,9 +14,9 @@
   <body>
     <div class="favorites-container">
       <span style="font-weight: 800; font-size: x-large; display: flex; justify-content: center;"><b><u>Favorites</u></b></span>
-      <ul class="favorites">
-      </ul>
+      <ul class="favorites"></ul>
     </div>
+
     <div class="weather-container">
       <div class="search-bar">
         <button type="submit" onclick="getLocation();" id="location">
@@ -27,13 +27,22 @@
           <i class="fa fa-search"></i>
         </button>
       </div>
+
       <div class="error-msg">
         <p>Invalid City Name</p>
       </div>
+
       <img class="weather-icon" />
       <h3 class="weather-type"></h3>
       <h1 class="temp"></h1>
       <h2 class="city"></h2>
+
+      <div class="predicted-temps" style="margin-top: 10px;">
+        <p id="pred1" style="margin: 0;"></p>
+        <p id="pred2" style="margin: 0;"></p>
+        <p id="pred3" style="margin: 0;"></p>
+      </div>
+
       <div class="phone-input">
         <button id="favCity">
           <i class="fa fa-star"></i>
