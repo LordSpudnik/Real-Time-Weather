@@ -117,7 +117,9 @@ async function checkWeather(city) {
         cityElem.insertAdjacentElement("afterend", predElem);
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while fetching the weather data. Ensure app.py is running.');
+        if (error.message.includes('Failed to fetch')) {
+            alert('Ensure app.py is running.');
+        }
     }
 }
 
