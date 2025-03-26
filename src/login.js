@@ -55,13 +55,20 @@ async function loginUser(e) {
 }
 
 async function signupUser(e) {
-    if (!checkPassword()) {
-        alert('Passwords do not match');
-        return;
-    }
     e.preventDefault();
     const username = document.getElementById('newUsername').value;
     const password = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (!username || !password || !confirmPassword) {
+        alert('Please enter all fields');
+        return;
+    }
+
+    if (!await checkPassword()) {
+        alert('Passwords do not match');
+        return;
+    }
 
     try {
         let response = await fetch('http://localhost:5000/api/signup', {
