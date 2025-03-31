@@ -41,7 +41,6 @@ async function loginUser(e) {
         });
 
         if (response.ok) {
-            alert("Login successful!");
             window.location.href = 'index.html';
         } else if (response.status === 401) {
             alert("Invalid username or password");
