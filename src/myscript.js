@@ -84,7 +84,7 @@ async function checkWeather(city) {
         const pressure = data.main.pressure;
         const windSpeed = data.wind.speed;
 
-        const res = await fetch('https://rt-weather.onrender.com/predict', {
+        const res = await fetch('https://rt-weather-ml.onrender.com/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
