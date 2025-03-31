@@ -84,7 +84,7 @@ async function checkWeather(city) {
         const pressure = data.main.pressure;
         const windSpeed = data.wind.speed;
 
-        const res = await fetch('http://localhost:5001/predict', {
+        const res = await fetch('https://rt-weather.onrender.com/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
@@ -181,7 +181,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
     }
 
     try {
-        let response = await fetch('http://localhost:5000/api/setAlert', {
+        let response = await fetch('https://rt-weather.onrender.com/api/setAlert', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
         if (response.status === 409) {
             const userConfirmed = confirm('Alert already exists for this phone number. Do you want to update it?');
             if (userConfirmed) {
-                response = await fetch('http://localhost:5000/api/setAlert', {
+                response = await fetch('https://rt-weather.onrender.com/api/setAlert', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -260,7 +260,7 @@ async function deleteAlert() {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/api/deleteAlert', {
+        const response = await fetch('https://rt-weather.onrender.com/api/deleteAlert', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
