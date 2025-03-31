@@ -1,0 +1,2 @@
+web: node server.js
+ml: gunicorn -b 0.0.0.0:5001 app:app
