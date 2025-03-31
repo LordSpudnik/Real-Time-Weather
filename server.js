@@ -4,12 +4,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 const mongoURI = "mongodb+srv://SubashVenkat:MongoDBWeatherPass@rt-weather.j3ukj.mongodb.net/UserData";
 mongoose.connect(mongoURI)
@@ -135,5 +138,5 @@ app.delete('/api/deleteAlert', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on https://rt-weather.onrender.com:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
