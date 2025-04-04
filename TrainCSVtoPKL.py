@@ -42,7 +42,6 @@ xgb_mae = mean_absolute_error(y_test, xgb_preds)
 # Use XGBoost's built-in RMSE function
 rf_rmse = np.sqrt(np.mean((y_test - rf_preds) ** 2))  # Corrected RMSE calculation
 xgb_rmse = np.sqrt(np.mean((y_test - xgb_preds) ** 2))  # Corrected RMSE calculation
- # XGBoost RMSE function
 
 # Print evaluation metrics
 print("Random Forest - MAE:", rf_mae, " RMSE:", rf_rmse)
@@ -55,8 +54,10 @@ best_model_name = "Random Forest" if rf_rmse < xgb_rmse else "XGBoost"
 print(f"Best model selected: {best_model_name}")
 
 # Save the best model to a .pkl file
-pkl_filename = "weather_model.pkl"
-with open(pkl_filename, "wb") as file:
-    pickle.dump(best_model, file)
+if best_model_name == "XGBoost":
+    best_model.save_model("weather_model.xgb")
+else:
+    with open("weather_model.pkl", "wb") as file:
+        pickle.dump(best_model, file)
 
-print(f"Model saved as {pkl_filename}")
+print(f"Model saved as {'weather_model.xgb' if best_model_name == 'XGBoost' else 'weather_model.pkl'}")
