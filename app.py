@@ -3,14 +3,22 @@ import pickle
 import numpy as np
 from flask_cors import CORS  # Ensure CORS is enabled
 import os
+import xgboost as xgb
 
 app = Flask(__name__)
 CORS(app)  # Allow JavaScript requests from browser
 
 # Load the trained ML model
 model_path = "weather_model.pkl"  # Ensure this is in the same directory
-with open(model_path, "rb") as file:    
-    model = pickle.load(file)
+
+if os.path.exists("weather_model.xgb"):
+    model = xgb.Booster()
+    model.load_model("weather_model.xgb")
+    is_xgb_model = True
+else:
+    with open(model_path, "rb") as file:    
+        model = pickle.load(file)
+    is_xgb_model = False
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -22,14 +30,23 @@ def predict():
 
         # Prepare the input array for ML model
         input_data = np.array([[humidity, pressure, wind_speed]])
-        predicted_temp_3h = float(model.predict(input_data)[0])  
+        if is_xgb_model:
+            predicted_temp_3h = float(model.predict(xgb.DMatrix(input_data))[0])
+        else:
+            predicted_temp_3h = float(model.predict(input_data)[0])  
 
         # Apply **progressive, smaller** changes for smoother trends
         input_data_6h = np.array([[humidity * 0.995, pressure * 0.998, wind_speed * 1.015]])  
-        predicted_temp_6h = float(model.predict(input_data_6h)[0])  
+        if is_xgb_model:
+            predicted_temp_6h = float(model.predict(xgb.DMatrix(input_data_6h))[0])
+        else:
+            predicted_temp_6h = float(model.predict(input_data_6h)[0])  
 
         input_data_9h = np.array([[humidity * 0.993, pressure * 0.997, wind_speed * 1.02]])  
-        predicted_temp_9h = float(model.predict(input_data_9h)[0])  
+        if is_xgb_model:
+            predicted_temp_9h = float(model.predict(xgb.DMatrix(input_data_9h))[0])
+        else:
+            predicted_temp_9h = float(model.predict(input_data_9h)[0])  
 
         # Ensure the differences between predictions are smooth
         if abs(predicted_temp_6h - predicted_temp_3h) > 3:
