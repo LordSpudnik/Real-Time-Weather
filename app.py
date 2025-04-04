@@ -5,6 +5,7 @@ from flask_cors import CORS  # Ensure CORS is enabled
 import os
 import xgboost as xgb
 
+print(f"XGBoost version: {xgb.__version__}")
 app = Flask(__name__)
 CORS(app)  # Allow JavaScript requests from browser
 
