@@ -20,7 +20,7 @@ else:
         model = pickle.load(file)
     is_xgb_model = False
 
-@app.route("https://rt-weather-ml.onrender.com/predict", methods=["POST"])
+@app.route("/predict", methods=["POST"])
 def predict():
     try:
         data = request.get_json()
