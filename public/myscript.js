@@ -1,15 +1,24 @@
-require('dotenv').config();
-
-const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-
-const ipKey = process.env.IP_KEY;
 
 //const baseUrl = 'http://localhost:5001/api/'; 
 const baseUrl = 'https://rt-weather.onrender.com/api/';
 
 //const mlUrl = 'http://localhost:5000/predict'; 
 const mlUrl = 'https://rt-weather-ml.onrender.com/predict';
+
+let apiKey, ipKey;
+async function fetchEnvVariables() {
+    try {
+        const response = await fetch(`${baseUrl}env`);
+        const data = await response.json();
+        apiKey = data.apiKey;
+        ipKey = data.ipKey;
+    } catch (error) {
+        console.error('Error fetching environment variables:', error);
+    }
+}
+fetchEnvVariables();
+
 
 const searchBox = document.querySelector('.search-bar input');
 searchBox.addEventListener('keypress', async function(event) {
