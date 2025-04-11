@@ -1,6 +1,8 @@
 const apiKey = "18a9856d5813180842d879c20ebcf98d";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 const ipKey = "2855899c50a501";
+const baseUrl = 'https://rt-weather.onrender.com/api/';
+const mlUrl = 'https://rt-weather-ml.onrender.com/predict';
 
 const searchBox = document.querySelector('.search-bar input');
 searchBox.addEventListener('keypress', async function(event) {
@@ -84,7 +86,7 @@ async function checkWeather(city) {
         const pressure = data.main.pressure;
         const windSpeed = data.wind.speed;
 
-        const res = await fetch('https://rt-weather-ml.onrender.com/predict', {
+        const res = await fetch(`${mlUrl}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ humidity, pressure, wind_speed: windSpeed })
@@ -181,7 +183,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
     }
 
     try {
-        let response = await fetch('https://rt-weather.onrender.com/api/setAlert', {
+        let response = await fetch(`${baseUrl}setAlert`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -200,7 +202,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
         if (response.status === 409) {
             const userConfirmed = confirm('Alert already exists for this phone number. Do you want to update it?');
             if (userConfirmed) {
-                response = await fetch('https://rt-weather.onrender.com/api/setAlert', {
+                response = await fetch(`${baseUrl}setAlert`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -260,7 +262,7 @@ async function deleteAlert() {
     }
 
     try {
-        const response = await fetch('https://rt-weather.onrender.com/api/deleteAlert', {
+        const response = await fetch(`${baseUrl}deleteAlert`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

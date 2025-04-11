@@ -1,3 +1,5 @@
+const baseUrl = 'https://rt-weather.onrender.com/api/';
+
 document.getElementById('signupTab').addEventListener('click', async function (e) {
     e.preventDefault();
     document.getElementById('loginFormContainer').classList.add('hidden');
@@ -32,7 +34,7 @@ async function loginUser(e) {
     }
 
     try {
-        let response = await fetch('https://rt-weather.onrender.com/api/login', {
+        let response = await fetch(`${baseUrl}login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +72,7 @@ async function signupUser(e) {
     }
 
     try {
-        let response = await fetch('https://rt-weather.onrender.com/api/signup', {
+        let response = await fetch(`${baseUrl}signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
