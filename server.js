@@ -13,11 +13,19 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/api/env', (req, res) => {
+    res.json({
+        apiKey: process.env.API_KEY,
+        ipKey: process.env.IP_KEY,
+    });
+});
+
 
 const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI)
