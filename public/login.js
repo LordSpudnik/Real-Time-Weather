@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5001/api/'; 
+const baseUrl = 'https://rt-weather.onrender.com/api/'; 
 // https://rt-weather.onrender.com/api/
 // http://localhost:5001/api/
 
