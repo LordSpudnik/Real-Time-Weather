@@ -1,4 +1,6 @@
-const baseUrl = 'https://rt-weather.onrender.com/api/';
+const baseUrl = 'http://localhost:5001/api/'; 
+// https://rt-weather.onrender.com/api/
+// http://localhost:5001/api/
 
 document.getElementById('signupTab').addEventListener('click', async function (e) {
     e.preventDefault();
