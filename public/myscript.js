@@ -5,13 +5,11 @@ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
 
 const ipKey = process.env.IP_KEY;
 
-const baseUrl = 'https://rt-weather.onrender.com/api/'; 
-// https://rt-weather.onrender.com/api/
-// http://localhost:5001/api/
+//const baseUrl = 'http://localhost:5001/api/'; 
+const baseUrl = 'https://rt-weather.onrender.com/api/';
 
-const mlUrl = 'https://rt-weather-ml.onrender.com/predict'; 
-// https://rt-weather-ml.onrender.com/predict
-// http://localhost:5000/predict
+//const mlUrl = 'http://localhost:5000/predict'; 
+const mlUrl = 'https://rt-weather-ml.onrender.com/predict';
 
 const searchBox = document.querySelector('.search-bar input');
 searchBox.addEventListener('keypress', async function(event) {
