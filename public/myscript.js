@@ -1,8 +1,15 @@
-const apiKey = "18a9856d5813180842d879c20ebcf98d";
+require('dotenv').config();
+
+const apiKey = process.env.API_KEY;
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-const ipKey = "2855899c50a501";
-const baseUrl = 'https://rt-weather.onrender.com/api/';
-const mlUrl = 'https://rt-weather-ml.onrender.com/predict';
+
+const ipKey = process.env.IP_KEY;
+
+const baseUrl = 'http://localhost:5001/api/'; // https://rt-weather.onrender.com/api/
+                                                // http://localhost:5001/api/
+
+const mlUrl = 'http://localhost:5000/predict'; // https://rt-weather-ml.onrender.com/predict
+                                                // http://localhost:5000/predict
 
 const searchBox = document.querySelector('.search-bar input');
 searchBox.addEventListener('keypress', async function(event) {
