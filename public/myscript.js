@@ -176,7 +176,21 @@ async function submitPhoneNumber() {
     var phoneNumber = document.getElementById("phone").value;
 
     if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
-        alert("Please enter a valid phone number.");
+        Notification.requestPermission()
+            .then((permission) => {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    new Notification("Real-Time Weather", {
+                        body: "Please enter a valid phone number.",
+                        icon: "./Icons/Logo.png",
+                    });
+                } else {
+                    console.log("Notification permission denied.");
+                }
+            })
+            .catch((err) => {
+                console.error("Error requesting notification permission:", err);
+            });
         return;
     }
     document.querySelector('.weather-container').style.transform = 'translateX(-100%)';
@@ -232,15 +246,58 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                         update: true
                     }),
                 });
+                Notification.requestPermission()
+                    .then((permission) => {
+                        if (permission === "granted") {
+                            console.log("Notification permission granted.");
+                            new Notification("Real-Time Weather", {
+                                body: "Your alert has been updated..",
+                                icon: "./Icons/Logo.png",
+                            });
+                        } else {
+                            console.log("Notification permission denied.");
+                        }
+                    })
+                    .catch((err) => {
+                        console.error("Error requesting notification permission:", err);
+                    });
             } else {
-                alert("Alert was not modified.");
+                Notification.requestPermission()
+                    .then((permission) => {
+                        if (permission === "granted") {
+                            console.log("Notification permission granted.");
+                            new Notification("Real-Time Weather", {
+                                body: "Your alert was not modified.",
+                                icon: "./Icons/Logo.png",
+                            });
+                        } else {
+                            console.log("Notification permission denied.");
+                        }
+                    })
+                    .catch((err) => {
+                        console.error("Error requesting notification permission:", err);
+                    });
                 return;
             }
         }
 
         if (response.ok) {
             const { message } = await response.json();
-            alert(message);
+            Notification.requestPermission()
+                .then((permission) => {
+                    if (permission === "granted") {
+                        console.log("Notification permission granted.");
+                        new Notification("Real-Time Weather", {
+                            body: "Alert saved successfully.",
+                            icon: "./Icons/Logo.png",
+                        });
+                    } else {
+                        console.log("Notification permission denied.");
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error requesting notification permission:", err);
+                });
             document.querySelector('.form-container').classList.remove('active');
             document.querySelector('.weather-container').style.transform = 'translateX(0)';
             document.querySelector('.weather-container').style.marginLeft = "0px";
@@ -253,7 +310,21 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('The server is not running.');
+        Notification.requestPermission()
+            .then((permission) => {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    new Notification("Real-Time Weather", {
+                        body: "The server is not running.",
+                        icon: "./Icons/Logo.png",
+                    });
+                } else {
+                    console.log("Notification permission denied.");
+                }
+            })
+            .catch((err) => {
+                console.error("Error requesting notification permission:", err);
+            });
     }
 });
 
@@ -273,7 +344,21 @@ async function deleteAlert() {
     const phoneNumber = document.getElementById("phone").value;
 
     if (phoneNumber.length != 10 || isNaN(phoneNumber)) {
-        alert("Please enter a valid phone number.");
+        Notification.requestPermission()
+            .then((permission) => {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    new Notification("Real-Time Weather", {
+                        body: "Enter a valid phone number.",
+                        icon: "./Icons/Logo.png",
+                    });
+                } else {
+                    console.log("Notification permission denied.");
+                }
+            })
+            .catch((err) => {
+                console.error("Error requesting notification permission:", err);
+            });
         return;
     }
 
@@ -288,7 +373,21 @@ async function deleteAlert() {
 
         if (response.ok) {
             const { message } = await response.json();
-            alert(message);
+            Notification.requestPermission()
+                .then((permission) => {
+                    if (permission === "granted") {
+                        console.log("Notification permission granted.");
+                        new Notification("Real-Time Weather", {
+                            body: "Alert deleted successfully.",
+                            icon: "./Icons/Logo.png",
+                        });
+                    } else {
+                        console.log("Notification permission denied.");
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error requesting notification permission:", err);
+                });
             document.querySelector('.form-container').classList.remove('active');
             document.querySelector('.weather-container').style.transform = 'translateX(0)';
             document.getElementById('tempThreshold').value = "";
@@ -296,10 +395,39 @@ async function deleteAlert() {
             document.getElementById('alertTime').value = "";
             document.getElementById("phone").value = "";
         } else {
-            alert("Entered Phone Number doesn't have an alert");
+            Notification.requestPermission()
+                .then((permission) => {
+                    if (permission === "granted") {
+                        console.log("Notification permission granted.");
+                        new Notification("Real-Time Weather", {
+                            body: "Entered Phone Number doesn't have an alert.",
+                            icon: "./Icons/Logo.png",
+                        });
+                    } else {
+                        console.log("Notification permission denied.");
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error requesting notification permission:", err);
+                });
         }
     } catch (error) {
         console.error('Error:', error);
+        Notification.requestPermission()
+            .then((permission) => {
+                if (permission === "granted") {
+                    console.log("Notification permission granted.");
+                    new Notification("Real-Time Weather", {
+                        body: "The server is not running.",
+                        icon: "./Icons/Logo.png",
+                    });
+                } else {
+                    console.log("Notification permission denied.");
+                }
+            })
+            .catch((err) => {
+                console.error("Error requesting notification permission:", err);
+            });
         alert('The server is not running.');
     }
 }
