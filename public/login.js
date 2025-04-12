@@ -51,7 +51,6 @@ async function loginUser(e) {
                         new Notification("Real-Time Weather", {
                             body: "Login Successful.",
                             icon: "./Icons/Logo.png",
-                            tag: "Enter-Valid-Phone",
                         });
                     } else {
                         console.log("Notification permission denied.");
