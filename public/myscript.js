@@ -185,6 +185,7 @@ async function submitPhoneNumber() {
                         icon: "./Icons/Logo.png",
                     });
                 } else {
+                    alert("Please enter a valid phone number.");
                     console.log("Notification permission denied.");
                 }
             })
@@ -251,10 +252,11 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                         if (permission === "granted") {
                             console.log("Notification permission granted.");
                             new Notification("Real-Time Weather", {
-                                body: "Your alert has been updated..",
+                                body: "Your alert has been updated.",
                                 icon: "./Icons/Logo.png",
                             });
                         } else {
+                            alert("Your alert has been updated.");
                             console.log("Notification permission denied.");
                         }
                     })
@@ -271,6 +273,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                                 icon: "./Icons/Logo.png",
                             });
                         } else {
+                            alert("Your alert was not modified.");
                             console.log("Notification permission denied.");
                         }
                     })
@@ -282,7 +285,6 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
         }
 
         if (response.ok) {
-            const { message } = await response.json();
             Notification.requestPermission()
                 .then((permission) => {
                     if (permission === "granted") {
@@ -292,6 +294,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                             icon: "./Icons/Logo.png",
                         });
                     } else {
+                        alert("Alert saved successfully.");
                         console.log("Notification permission denied.");
                     }
                 })
@@ -319,6 +322,7 @@ document.getElementById('alertForm').addEventListener('submit', async function(e
                         icon: "./Icons/Logo.png",
                     });
                 } else {
+                    alert("The server is not running.");
                     console.log("Notification permission denied.");
                 }
             })
@@ -353,6 +357,7 @@ async function deleteAlert() {
                         icon: "./Icons/Logo.png",
                     });
                 } else {
+                    alert("Enter a valid phone number.");
                     console.log("Notification permission denied.");
                 }
             })
@@ -372,7 +377,6 @@ async function deleteAlert() {
         });
 
         if (response.ok) {
-            const { message } = await response.json();
             Notification.requestPermission()
                 .then((permission) => {
                     if (permission === "granted") {
@@ -382,6 +386,7 @@ async function deleteAlert() {
                             icon: "./Icons/Logo.png",
                         });
                     } else {
+                        alert("Alert deleted successfully.");
                         console.log("Notification permission denied.");
                     }
                 })
@@ -404,6 +409,7 @@ async function deleteAlert() {
                             icon: "./Icons/Logo.png",
                         });
                     } else {
+                        alert("Entered Phone Number doesn't have an alert.");
                         console.log("Notification permission denied.");
                     }
                 })
@@ -422,6 +428,7 @@ async function deleteAlert() {
                         icon: "./Icons/Logo.png",
                     });
                 } else {
+                    alert("The server is not running.");
                     console.log("Notification permission denied.");
                 }
             })
