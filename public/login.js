@@ -44,21 +44,6 @@ async function loginUser(e) {
         });
 
         if (response.ok) {
-            Notification.requestPermission()
-                .then((permission) => {
-                    if (permission === "granted") {
-                        console.log("Notification permission granted.");
-                        new Notification("Real-Time Weather", {
-                            body: "Login Successful.",
-                            icon: "./Icons/Logo.png",
-                        });
-                    } else {
-                        console.log("Notification permission denied.");
-                    }
-                })
-                .catch((err) => {
-                    console.error("Error requesting notification permission:", err);
-                });
             window.location.href = 'index.html';
         } else if (response.status === 401) {
             alert("Invalid username or password");
