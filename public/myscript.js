@@ -470,6 +470,11 @@ async function addCity() {
   const city = document.querySelector(".city").innerHTML;
   const item = document.createElement("li");
   item.textContent = city;
+  item.classList.add("favItem");
+  item.addEventListener("click", async function () {
+    checkWeather(city);
+    document.querySelector(".search-bar input").value = city;
+  });
   const button = document.createElement("button");
   button.textContent = "X";
   button.addEventListener("click", async function () {
