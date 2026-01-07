@@ -1,3 +1,5 @@
+# .venv\Scripts\activate 
+
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
@@ -11,6 +13,7 @@ CORS(app)  # Allow JavaScript requests from browser
 # Load the trained ML model
 model_path = "weather_model.pkl"  # Ensure this is in the same directory
 
+'''
 if os.path.exists("weather_model.xgb"):
     model = xgb.Booster()
     model.load_model("weather_model.xgb")
@@ -18,6 +21,11 @@ if os.path.exists("weather_model.xgb"):
 else:
     with open(model_path, "rb") as file:    
         model = pickle.load(file)
+    is_xgb_model = False
+'''
+
+with open(model_path, "rb") as file:    
+    model = pickle.load(file)
     is_xgb_model = False
 
 @app.route("/predict", methods=["POST"])
