@@ -59,11 +59,6 @@ The application is built with a combination of front-end and back-end technologi
 - **`login.html`**: Login and signup page.
 - **`style.css` & `login.css`**: Styling for the main interface and login/signup pages.
 
-## Deployment Link
-
-Check out the live deployment of the Real-Time Weather Website here:  
-[**Real-Time Weather**](https://rt-weather.onrender.com)
-
 ## Acknowledgments
 
 - **OpenWeatherMap**: For providing reliable weather data.
