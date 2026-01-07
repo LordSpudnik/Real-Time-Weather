@@ -1,9 +1,13 @@
 import requests
 import csv
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # OpenWeatherMap API key
-api_key = "91644e23110cb722b074446a2227b86b"
+api_key = os.getenv("PY_API_KEY")
 
 # List of major cities representing Indian states
 cities = [
