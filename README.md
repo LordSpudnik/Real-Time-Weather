@@ -47,7 +47,7 @@ The application is built with a combination of front-end and back-end technologi
 ### Deployment
 - **Render**: The application is deployed on Render for both the Flask ML server (`rt-weather-ml.onrender.com`) and the Node.js backend (`rt-weather.onrender.com`).
 - Visit the live demo:  
-  [Deployment Link]([https://rt-weather.onrender.com/])
+  [Deployment Link](https://rt-weather.onrender.com/)
 
 ## Project Structure
 
