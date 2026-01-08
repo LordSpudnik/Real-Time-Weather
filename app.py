@@ -28,6 +28,10 @@ with open(model_path, "rb") as file:
     model = pickle.load(file)
     is_xgb_model = False
 
+@app.route("/", methods=["GET"])
+def wake_up():
+    return jsonify({"status": "ML Server is awake"}), 200
+
 @app.route("/predict", methods=["POST"])
 def predict():
     try:

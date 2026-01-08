@@ -1,6 +1,18 @@
 //const baseUrl = "http://localhost:5001/api/";
 const baseUrl = "https://rt-weather.onrender.com/api/";
 
+async function wakeUpMLServer() {
+  try {
+    console.log("Waking up ML server...");
+    await fetch(mlUrl);
+    console.log("ML server is awake!");
+  } catch (error) {
+    console.log("Wake-up signal sent (even if failed, server will boot).");
+  }
+}
+
+wakeUpMLServer();
+
 document
   .getElementById("signupTab")
   .addEventListener("click", async function (e) {
